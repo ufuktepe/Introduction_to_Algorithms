@@ -72,6 +72,7 @@ def huffman(characters):
 
 
 if __name__ == '__main__':
+    # The following is from Chp 16.3 of CLRS
     char_freq = {'a': 45, 'b': 13, 'c': 12, 'd': 16, 'e': 9, 'f': 5}
 
     characters = []
