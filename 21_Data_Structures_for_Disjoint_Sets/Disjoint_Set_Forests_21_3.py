@@ -90,7 +90,7 @@ class Graph:
         """
         Recursively finds the root of the tree containing node x. Note that this method is a two-pass method and
         implements 'Path Compression'. It makes one pass to find the root, and as the recursion unwinds, it makes a
-        second pass back down to  update each node to point directly to the root.
+        second pass back down to update each node to point directly to the root.
         :param x: the given node
         :return: the root of the tree containing node x
         """
