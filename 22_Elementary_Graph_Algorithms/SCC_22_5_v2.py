@@ -1,4 +1,3 @@
-from collections import defaultdict
 import sys
 
 sys.setrecursionlimit(2 ** 17)
