@@ -37,7 +37,7 @@ def build_min_heap(lst):
     :param lst: input array
     :return: None
     """
-    for i in range(len(lst) // 2 - 1, -1, -1):
+    for i in range(len(lst) // 2, -1, -1):
         min_heapify(lst, i)
 
 
@@ -98,3 +98,23 @@ def min_heap_insert(lst, node):
     restore_min_heap_property(lst, len(lst) - 1)
 
 
+def heap_decrease_key(lst, i, key):
+    """
+    Sets the value of lst[i] to key and calls restore_min_heap_property to find the correct position for the value of
+    lst[i].
+    :param lst: input array
+    :param i: index of the item whose value will be updated
+    :param key: new value for lst[i]
+    :return: None
+    """
+
+    # Check if the new value is larger than the current value
+    if key > lst[i]:
+        print('new key is larger than current key.')
+        return
+
+    # Update the value of lst[i] to its new value
+    lst[i] = key
+
+    # Restore the min-heap property
+    restore_min_heap_property(lst, i)

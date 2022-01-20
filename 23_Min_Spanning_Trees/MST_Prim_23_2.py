@@ -28,24 +28,50 @@ class Graph:
     def add_edge(self, vertex_1, vertex_2, weight):
         vertex_1.add_adj_vertex(vertex_2, weight)
 
+    # NOTE: Implement Fibonacci Heap to efficiently decrease the key of an item in the priority queue
     def mst_prim(self):
+        """
+        Creates a min priority queue from vertices based on the vertices' key attribute. The key attribute of a vertex
+        is the minimum weight of any edge connecting that vertex to another vertex. All vertices that are not in the MST
+        are in the min priority queue.
+        :return:
+        """
+        # Deep copy the vertices
         min_pq = list(deepcopy(self.vertices))
+
+        # Set the root of the MST to the first item of the min_pq
         root = min_pq[0]
         root.key = 0
 
+        # Create a minimum priority queue
         build_min_heap(min_pq)
 
+        # Create the output mst graph
         mst = Graph(set())
 
+        # Extract the vertex that has the minimum key value from the heap one by one
         while min_pq:
+
+            for n in min_pq:
+                print(f'{n.id}{n.key}', end=' ')
+            print('')
+
             u = extract_min(min_pq)
+            print(f'Extracted : {u.id}')
+
+            # Add the extracted vertex to the output mst graph
             mst.vertices.add(u)
 
             # Loop through u's adjacent vertices
             for v, weight in u.adj.items():
+                print(f'Checking {v.id}{v.key} edge={weight}')
+                # If v is not yet added to mst and if its key value is larger than the weight of the edge (u,v)
+                # set its key to the weight of the edge (u,v) parent to u
                 if v in min_pq and v.key > weight:
                     v.key = weight
                     v.parent = u
+                    # Decrease the key of v in min_pq. This needs to be implemented using Fibonacci heaps for better
+                    # performance!!!!
 
         return mst
 

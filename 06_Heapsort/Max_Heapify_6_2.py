@@ -37,7 +37,7 @@ def build_max_heap(lst):
     :param lst: input array
     :return: None
     """
-    for pos in range(len(lst) // 2 - 1, -1, -1):
+    for pos in range(len(lst) // 2, -1, -1):
         max_heapify(lst, pos, len(lst))
 
 
