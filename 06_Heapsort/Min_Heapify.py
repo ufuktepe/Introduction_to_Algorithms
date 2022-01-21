@@ -1,120 +1,130 @@
-def min_heapify(lst, i):
-    """
-    Assumes the left and right child binary trees of lst[i] are min-heaps.
-    Floats down the value at lst[i] to its correct position so that the subtree rooted at index i obeys the min heap
-    property.
-    Time complexity: O(log n)
-    :param lst: input array
-    :param i: index of the item to be positioned
-    :return: None
-    """
+class MinHeap():
+    def __init__(self, lst):
+        self.lst = lst
+        self.idx_dict = {}
+        self.build_min_heap()
 
-    left = 2 * i + 1
-    right = 2 * i + 2
+    def build_idx_dict(self):
+        """
+        Resets and updates the self.idx_dict
+        :return: None
+        """
+        self.idx_dict = {}
+        for i in range(len(self.lst)):
+            self.idx_dict[self.lst[i]] = i
 
-    heap_size = len(lst)
+    def min_heapify(self, i):
+        """
+        Assumes the left and right child binary trees of self.lst[i] are min-heaps.
+        Floats down the value at self.lst[i] to its correct position so that the subtree rooted at index i obeys the min heap
+        property.
+        Time complexity: O(log n)
+        :param i: index of the item to be positioned
+        :return: None
+        """
 
-    # Check if the left node is smaller than the current node
-    if heap_size > left and lst[left] < lst[i]:
-        min_idx = left
-    else:
-        min_idx = i
+        left = 2 * i + 1
+        right = 2 * i + 2
 
-    # Check if the right node is smaller than the lst[min_idx]
-    if heap_size > right and lst[right] < lst[min_idx]:
-        min_idx = right
+        heap_size = len(self.lst)
 
-    # If lst[i] is not the min, swap lst[min_idx] with lst[i] and call min_heapify again
-    if min_idx != i:
-        lst[i], lst[min_idx] = lst[min_idx], lst[i]
-        min_heapify(lst, min_idx)
+        # Check if the left node is smaller than the current node
+        if heap_size > left and self.lst[left] < self.lst[i]:
+            min_idx = left
+        else:
+            min_idx = i
 
+        # Check if the right node is smaller than the self.lst[min_idx]
+        if heap_size > right and self.lst[right] < self.lst[min_idx]:
+            min_idx = right
 
-def build_min_heap(lst):
-    """
-    Builds a min-heap
-    Time complexity: O(n)
-    :param lst: input array
-    :return: None
-    """
-    for i in range(len(lst) // 2, -1, -1):
-        min_heapify(lst, i)
+        # If self.lst[i] is not the min, swap self.lst[min_idx] with self.lst[i] and call min_heapify again
+        if min_idx != i:
+            self.lst[i], self.lst[min_idx] = self.lst[min_idx], self.lst[i]
+            self.min_heapify(min_idx)
 
+    def build_min_heap(self):
+        """
+        Builds a min-heap and the idx_dict.
+        Time complexity: O(n)
+        :param self.lst: input array
+        :return: None
+        """
+        for i in range(len(self.lst) // 2, -1, -1):
+            self.min_heapify(i)
 
-def extract_min(lst):
-    """
-    Removes and returns the item with the minimum key (lst[0]).
-    :param lst: input array
-    :return: item with the smallest key
-    """
+        self.build_idx_dict()
 
-    if len(lst) < 1:
-        raise IndexError()
+    def extract_min(self):
+        """
+        Removes and returns the item with the minimum key (self.lst[0]).
+        :return: item with the smallest key
+        """
 
-    min = lst[0]
+        if len(self.lst) < 1:
+            raise IndexError()
 
-    # Replace the first item with the last item
-    lst[0] = lst[-1]
+        min = self.lst[0]
 
-    # Remove the last item
-    del lst[-1]
+        # Replace the first item with the last item
+        self.lst[0] = self.lst[-1]
 
-    # Restore the min heap property
-    build_min_heap(lst)
+        # Remove the last item
+        del self.lst[-1]
 
-    return min
+        # Restore the min heap property
+        self.build_min_heap()
 
+        return min
 
-def restore_min_heap_property(lst, i):
-    """
-    Finds the correct position for lst[i] by traversing the tree from i to the root.
-    Recursively compares the value of the child node to its parent and swaps the child and parent if child has smaller
-    value.
-    :param lst: input array
-    :param i: index of the child node
-    :return: none
-    """
+    def restore_min_heap_property(self, i):
+        """
+        Finds the correct position for self.lst[i] by traversing the tree from i to the root.
+        Recursively compares the value of the child node to its parent and swaps the child and parent if child has smaller
+        value.
+        Finally, builds the idx_dict.
+        :param i: index of the child node
+        :return: none
+        """
 
-    if i == 0:
-        return
+        if i == 0:
+            return
 
-    parent_idx = (i - 1) // 2
+        parent_idx = (i - 1) // 2
 
-    if lst[parent_idx] > lst[i]:
-        # Swap the parent with the child
-        lst[i], lst[parent_idx] = lst[parent_idx], lst[i]
-        # Check if the position of lst[parent_idx] is correct
-        restore_min_heap_property(lst, parent_idx)
+        if self.lst[parent_idx] > self.lst[i]:
+            # Swap the parent with the child
+            self.lst[i], self.lst[parent_idx] = self.lst[parent_idx], self.lst[i]
+            # Check if the position of self.lst[parent_idx] is correct
+            self.restore_min_heap_property(parent_idx)
 
+        self.build_idx_dict()
 
-def min_heap_insert(lst, node):
-    """
-    Inserts a node to a min heap.
-    :param lst: input array (min heap)
-    :param node: node to be inserted in the min heap
-    :return: None
-    """
-    lst.append(node)
-    restore_min_heap_property(lst, len(lst) - 1)
+    def min_heap_insert(self, node):
+        """
+        Inserts a node to a min heap.
+        :param node: node to be inserted in the min heap
+        :return: None
+        """
+        self.lst.append(node)
+        self.restore_min_heap_property(len(self.lst) - 1)
 
+    def heap_decrease_key(self, i, key):
+        """
+        Sets the value of self.lst[i] to key and calls restore_min_heap_property to find the correct position for the value of
+        self.lst[i].
+        :param i: index of the item whose value will be updated
+        :param key: new value for self.lst[i]
+        :return: None
+        """
 
-def heap_decrease_key(lst, i, key):
-    """
-    Sets the value of lst[i] to key and calls restore_min_heap_property to find the correct position for the value of
-    lst[i].
-    :param lst: input array
-    :param i: index of the item whose value will be updated
-    :param key: new value for lst[i]
-    :return: None
-    """
+        # Check if the new value is larger than the current value
+        if key > self.lst[i].key:
+            print('new key is larger than current key.')
+            return
 
-    # Check if the new value is larger than the current value
-    if key > lst[i]:
-        print('new key is larger than current key.')
-        return
+        # Update the value of self.lst[i] to its new value
+        self.lst[i].key = key
 
-    # Update the value of lst[i] to its new value
-    lst[i] = key
-
-    # Restore the min-heap property
-    restore_min_heap_property(lst, i)
+        # Restore the min-heap property
+        self.restore_min_heap_property(i)
