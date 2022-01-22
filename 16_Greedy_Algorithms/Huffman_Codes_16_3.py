@@ -42,8 +42,7 @@ def huffman(characters):
     n = len(characters)
 
     # Create a min heap (min-priority queue) from the given characters
-    pq = characters
-    build_min_heap(pq)
+    pq = MinHeap(characters)
 
     # Loop n - 1 times to find the non-leaf nodes of the tree.
     # We know that there must be n - 1 non-leaf nodes because we are building a full binary tree and there are n
@@ -52,11 +51,11 @@ def huffman(characters):
 
         # Extract the node with the minimum frequency (essentially this is the root node in the min-priority queue).
         # Note that when we perform this action, the extracted node will be removed from the min-priority queue.
-        x = extract_min(pq)
+        x = pq.extract_min()
 
         # Extract the next node with the minimum frequency (this is the root node since x is removed from the
         # min-priority queue.
-        y = extract_min(pq)
+        y = pq.extract_min()
 
         # Merge nodes x and y. In other words, create a parent node for x and y which has frequency x.frequency +
         # y.frequency
@@ -65,7 +64,7 @@ def huffman(characters):
         z.right = y
 
         # Insert the parent node in the min-priority queue
-        min_heap_insert(pq, z)
+        pq.min_heap_insert(z)
 
     # Return the min-priority queue which should only include the root node
     return pq
@@ -86,7 +85,7 @@ if __name__ == '__main__':
     # print the tree
 
     # Populate the nodes list with the root node
-    nodes = [pq[0]]
+    nodes = [pq.lst[0]]
 
     # Depth of the tree
     depth = 0

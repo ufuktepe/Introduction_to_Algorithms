@@ -40,8 +40,8 @@ class Graph:
 
     def mst_kruskal(self):
         """
-        Sorts the edges of the tree in non-decreasing order by weight. Then loops through each edge. If the vertices of the edge are in different trees
-        merges the two trees and adds the edge to the minimum spanning tree.
+        Sorts the edges of the tree in non-decreasing order by weight. Then loops through each edge. If the vertices of
+        the edge are in different trees merges the two trees and adds the edge to the minimum spanning tree.
         :return: minimum spanning tree
         """
         # Place each vertex in its own set
@@ -59,13 +59,15 @@ class Graph:
 
         i = 0
 
-        # Loop through each edge until the mst graph has n-1 edges where n is the number of vertices in the original graph
+        # Loop through each edge until the mst graph has n-1 edges where n is the number of vertices in the original
+        # graph
         while len(mst.edges) < len(self.vertices) - 1:
             edge = edge_list[i]
             vertex_1 = edge.vertex_1
             vertex_2 = edge.vertex_2
 
-            # If vertex_1 and vertex_2 are in different trees, merge the vertices to create a single tree. Then, add the edge to the mst graph.
+            # If vertex_1 and vertex_2 are in different trees, merge the vertices to create a single tree. Then, add
+            # the edge to the mst graph.
             if self.find_set(vertex_1) != self.find_set(vertex_2):
                 self.union(vertex_1, vertex_2)
                 mst.add_edge(edge)
