@@ -4,8 +4,9 @@ def lcs_length(x, y):
     :param x: first string
     :param y: second string
     :return: lcs_len and lcs lists.
-    lcs_len defines the length of an LCS. For example, lcs_len[2, 4] is the length of an LCS of the sequence x_2
-    and y_4. Note that x_0 and y_0 are zero length (empty) sequences.
+    lcs_len defines the length of an LCS. For example, lcs_len[2, 4] is the length of an LCS of the following
+    sequences [x_1, x_2] and [y_1, y_2, y_3, y_4].
+    Note that x_0 and y_0 are zero length (empty) sequences.
     lcs includes the longest common subsequence for each pairs of sequence. For example, lcs[7, 6] is the LCS of x_7
     and y_6.
     """
@@ -13,11 +14,11 @@ def lcs_length(x, y):
     n = len(y)
 
     # Initialize the output list with zeros. Essentially this is a table where elements of x form the rows and
-    # elements of y form the columns. i.e. lcs_len[6, 3] defines the length of an LCS of the sequence x_6 and y_3.
-    lcs_len = [[0 for a in range(n + 1)] for b in range(m + 1)]
+    # elements of y form the columns.
+    lcs_len = [[0 for j in range(n + 1)] for i in range(m + 1)]
 
     # Initialize the list for longest common subsequences.
-    lcs = [['' for a in range(n + 1)] for b in range(m + 1)]
+    lcs = [['' for j in range(n + 1)] for i in range(m + 1)]
 
     # The for loop below builds lcs_len[m + 1][n + 1] in a bottom-up fashion.
     # lcs_len contains length of LCS for already computed sub-problems

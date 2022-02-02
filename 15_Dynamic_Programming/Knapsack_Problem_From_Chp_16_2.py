@@ -25,7 +25,7 @@ def knapsack(items, c):
     # Create the dynamic programming table and populate the first column and first row with zeros.
     # The rows represent the item numbers. Note that row 0 represents an empty set hence it has zero values for any j.
     # The columns represent the capacity of the knapsack. Note that column 0 represents a knapsack with 0 capacity.
-    # Hence column 0 has 0 values for each row.
+    # Hence, column 0 has value 0 for each row.
     # dp[i][j] represents the maximum value of items using items 1 to i and the capacity of the knapsack is j.
     dp = [[0 if i == 0 or j == 0 else None for j in range(c + 1)] for i in range(n + 1)]
 
