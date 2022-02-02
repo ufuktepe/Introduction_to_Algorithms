@@ -1,5 +1,52 @@
 
+def merge_sort_recursive(lst):
+    """
+    Recursively sorts the list by dividing the list into 2 halves and merging them.
+    :param lst: input list
+    :return: None
+    """
+    if len(lst) == 1:
+        return lst
 
+    left = lst[:len(lst)//2]
+    right = lst[len(lst)//2:]
+
+    merge_sort_recursive(left)
+    merge_sort_recursive(right)
+    merge_iterative_inplace(left, right, lst)
+
+
+def merge_iterative_inplace(a, b, lst):
+    """
+    Merges two already sorted lists in place. Keeps track of indices i and j and increments them as elements are added to the
+    main list.
+    :param a: first list to be merged
+    :param b: second list to be merged
+    :param lst: main list
+    :return: None
+    """
+
+    i = 0
+    j = 0
+    k = 0
+    while i < len(a) and j < len(b):
+        if a[i] < b[j]:
+            lst[k] = a[i]
+            i += 1
+        else:
+            lst[k] = b[j]
+            j += 1
+        k += 1
+
+    # Get the rest of the items
+    while i < len(a):
+        lst[k] = a[i]
+        i += 1
+        k += 1
+    while j < len(b):
+        lst[k] = b[j]
+        j += 1
+        k += 1
 
 
 def merge_sort_iterative(lst):
@@ -94,4 +141,10 @@ def merge_recursive(a, b):
 
 if __name__ == '__main__':
     lst = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
-    print(merge_sort_iterative(lst))
+
+    # # Iterative approach
+    # print(merge_sort_iterative(lst))
+
+    # Recursive approach
+    merge_sort_recursive(lst)
+    print(lst)
