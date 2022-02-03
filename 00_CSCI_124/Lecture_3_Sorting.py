@@ -1,7 +1,4 @@
 
-
-
-
 def merge_sort_iterative(lst):
     """
     Iteratively sorts a list. First creates a main list of single element lists and iteratively pops the first 2

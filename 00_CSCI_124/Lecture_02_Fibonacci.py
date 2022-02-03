@@ -8,8 +8,8 @@ def fibonacci_iterative(n):
     lst = [0, 1]
 
     for i in range(2, n + 1):
-        # lst.append(lst[i - 1] + lst[i - 2])
-        lst.append((lst[i - 1] + lst[i - 2]) % 65536)
+        lst.append(lst[i - 1] + lst[i - 2])
+        # lst.append((lst[i - 1] + lst[i - 2]) % 65536)
 
     return lst[n]
 
@@ -32,19 +32,19 @@ def matrix_multiply(m1, m2):
     a, b, c, d = m1
     x, y, z, w = m2
 
-    # return (
-    #     a * x + b * z,
-    #     a * y + b * w,
-    #     c * x + d * z,
-    #     c * y + d * w
-    # )
-
     return (
-        (a * x + b * z) % 65536,
-        (a * y + b * w) % 65536,
-        (c * x + d * z) % 65536,
-        (c * y + d * w) % 65536
+        a * x + b * z,
+        a * y + b * w,
+        c * x + d * z,
+        c * y + d * w
     )
+
+    # return (
+    #     (a * x + b * z) % 65536,
+    #     (a * y + b * w) % 65536,
+    #     (c * x + d * z) % 65536,
+    #     (c * y + d * w) % 65536
+    # )
 
 
 def matrix_power(f, m):
@@ -69,11 +69,11 @@ if __name__ == '__main__':
 
     start = time()
 
-    n = 42
+    n = 10**6
 
-    print(fibonacci_recursive(n))
+    # print(fibonacci_recursive(n))
     # print(fibonacci_iterative(n))
-    # print(fibonacci_matrix(n))
+    print(fibonacci_matrix(n))
 
 
     # x = 0
