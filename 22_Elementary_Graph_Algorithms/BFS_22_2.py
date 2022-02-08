@@ -27,7 +27,7 @@ def bfs(s):
     """
     Finds the distance and parent of each vertex wrt the given root vertex using breadth-first search.
     Initially the color property of the vertices are set to White (meaning they are not discovered yet)
-    When they are discovered they are turned into 'White' meaning they might have undiscovered (White) adjacent vertices
+    When they are discovered they are turned into 'Gray' meaning they might have undiscovered (White) adjacent vertices
     Once all adjacent vertices of a vertex are discovered, that vertex is turned into 'Black' (all neighbors are
     discovered)
 

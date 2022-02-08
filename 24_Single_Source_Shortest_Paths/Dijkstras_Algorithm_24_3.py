@@ -52,17 +52,17 @@ def find_closest_vertex(frontier_vertices):
 
     return closest_vertex
 
-# Example 1
-# Define the graph (Chapter 24.3 in CLRS)
-s = Vertex('s', {'t': 10, 'y': 5})
-t = Vertex('t', {'x': 1, 'y': 2})
-y = Vertex('y', {'t': 3, 'z': 2, 'x': 9})
-x = Vertex('x', {'z': 4})
-z = Vertex('z', {'s': 7, 'x': 6})
-graph = {'x': x, 'y': y, 'z': z, 's': s, 't': t}
-
-dijkstra_heap(graph, s)
-# dijkstra(graph, s)
+# # Example 1
+# # Define the graph (Chapter 24.3 in CLRS)
+# s = Vertex('s', {'t': 10, 'y': 5})
+# t = Vertex('t', {'x': 1, 'y': 2})
+# y = Vertex('y', {'t': 3, 'z': 2, 'x': 9})
+# x = Vertex('x', {'z': 4})
+# z = Vertex('z', {'s': 7, 'x': 6})
+# graph = {'x': x, 'y': y, 'z': z, 's': s, 't': t}
+#
+# dijkstra_heap(graph, s)
+# # dijkstra(graph, s)
 
 # # Example 2
 # # Another graph
@@ -76,6 +76,17 @@ dijkstra_heap(graph, s)
 #
 # dijkstra_heap(graph, a)
 # # dijkstra(graph, a)
+
+# Example 3
+# Another graph
+a = Vertex('a', {'d': 10, 'b': 1})
+b = Vertex('b', {'c': 1})
+c = Vertex('c', {'d': 1})
+d = Vertex('d', {})
+graph = {'d': d, 'c': c, 'a': a, 'b': b}
+
+# dijkstra_heap(graph, a)
+dijkstra(graph, a)
 
 # Print the results
 for vertex in graph.values():
