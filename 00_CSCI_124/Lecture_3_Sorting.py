@@ -64,7 +64,6 @@ def merge_sort_iterative(lst):
     for n in lst:
         q.append([n])
 
-    count = 1
     while len(q) > 1:
         # Pop the first 2 elements of q, merge them, and then add the merged list at the end of q
 
@@ -73,8 +72,6 @@ def merge_sort_iterative(lst):
 
         # Merge q.pop(0), q.pop(0) recursively
         q.append(merge_recursive(q.pop(0), q.pop(0)))
-        print(count)
-        count += 1
 
     if q:
         return q[0]
@@ -139,12 +136,27 @@ def merge_recursive(a, b):
     return res
 
 
+def insertion_sort(lst):
+    # Loop through each index up to the second last index
+    for i in range(len(lst) - 1):
+        j = i
+
+        # Swap if (j_1)th value is less than jth value
+        while j >= 0 and lst[j+1] < lst[j]:
+            lst[j], lst[j+1] = lst[j+1], lst[j]
+            j -= 1
+
+
 if __name__ == '__main__':
     lst = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
 
-    # # Iterative approach
+    # # Merge Sort Iterative approach
     # print(merge_sort_iterative(lst))
 
-    # Recursive approach
-    merge_sort_recursive(lst)
+    # # Merge Sort Recursive approach
+    # merge_sort_recursive(lst)
+    # print(lst)
+
+    # Insertion Sort
+    insertion_sort(lst)
     print(lst)
