@@ -77,27 +77,28 @@ def dfs(vertex, sorted_vertices):
     return sorted_vertices
 
 
-# # Define the graph (Chapter 24.2 in CLRS)
-# r = Vertex('r', {'s': 5, 't': 3})
-# s = Vertex('s', {'t': 2, 'x': 6})
-# t = Vertex('t', {'x': 7, 'y': 4, 'z': 2})
-# x = Vertex('x', {'y': -1, 'z': 1})
-# y = Vertex('y', {'z': -2})
-# z = Vertex('z', {})
-# graph = {'x': x, 'y': y, 'z': z, 's': s, 't': t, 'r': r}
-#
-# # Set the root vertex
-# s.distance = 0
-#
-# # Run the DAG Shortest Path Algorithm
-# dag_shortest_paths(graph)
-#
-# # Print the results
-# for vertex in graph.values():
-#     if vertex.parent is None:
-#         print(f'id:{vertex.id}, parent:None, distance:{vertex.distance}')
-#     else:
-#         print(f'id:{vertex.id}, parent:{vertex.parent.id}, distance:{vertex.distance}')
+if __name__ == '__main__':
+    # Define the graph (Chapter 24.2 in CLRS)
+    r = Vertex('r', {'s': 5, 't': 3})
+    s = Vertex('s', {'t': 2, 'x': 6})
+    t = Vertex('t', {'x': 7, 'y': 4, 'z': 2})
+    x = Vertex('x', {'y': -1, 'z': 1})
+    y = Vertex('y', {'z': -2})
+    z = Vertex('z', {})
+    graph = {'x': x, 'y': y, 'z': z, 's': s, 't': t, 'r': r}
+
+    # Set the root vertex
+    s.distance = 0
+
+    # Run the DAG Shortest Path Algorithm
+    dag_shortest_paths(graph)
+
+    # Print the results
+    for vertex in graph.values():
+        if vertex.parent is None:
+            print(f'id:{vertex.id}, parent:None, distance:{vertex.distance}')
+        else:
+            print(f'id:{vertex.id}, parent:{vertex.parent.id}, distance:{vertex.distance}')
 
 
 
