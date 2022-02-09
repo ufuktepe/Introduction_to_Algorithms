@@ -6,6 +6,9 @@ class Vertex:
         self.visited = False
         self.adj_dict = an_adj_dict  # key=id : val=weight
 
+        self.max_length = 0  # Length of the longest path when starting from this vertex
+        self.child = None
+
     def add_adj_vertex(self, id, weight):
         self.adj_dict[id] = weight
 
@@ -15,6 +18,42 @@ class Vertex:
     def __le__(self, other):
         return self.id <= other.id
 
+
+def dfs_dp(vertex, graph, dp):
+    vertex.visited = True
+
+    # Loop thru adjacent vertices
+    for adj_vertex_id in vertex.adj_dict:
+        adj_vertex = graph[adj_vertex_id]
+
+        if not adj_vertex.visited:
+            dfs_dp(adj_vertex, graph, dp)
+
+        if vertex.max_length < adj_vertex.max_length + vertex.adj_dict[adj_vertex_id]:
+            vertex.max_length = adj_vertex.max_length + vertex.adj_dict[adj_vertex_id]
+            vertex.child = adj_vertex
+
+
+def dag_longest_paths_dp(graph):
+
+    for vertex_id in graph:
+        vertex = graph[vertex_id]
+
+        if not vertex.visited:
+            dfs_dp(vertex, graph, dp)
+
+    longest_path = 0
+
+    for vertex_id in graph:
+        vertex = graph[vertex_id]
+
+        if longest_path < vertex.max_length:
+            longest_path = vertex.max_length
+
+    return longest_path
+
+
+# -----------------------------------------------------------------------
 
 def dag_longest_paths(graph):
 
@@ -28,7 +67,6 @@ def dag_longest_paths(graph):
             if adj_vertex.distance < vertex.distance + vertex.adj_dict[adj_vertex_id]:
                 adj_vertex.distance = vertex.distance + vertex.adj_dict[adj_vertex_id]
                 adj_vertex.parent = vertex
-
 
 
 def sort_topologically(graph):
@@ -73,7 +111,9 @@ if __name__ == '__main__':
     # Set the root vertex
     a.distance = 0
 
-    dag_longest_paths(graph)
+    # dag_longest_paths(graph)
+
+    dag_longest_paths_dp(graph)
 
     # Print the results
     for vertex in graph.values():
