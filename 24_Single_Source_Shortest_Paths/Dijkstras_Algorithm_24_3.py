@@ -3,9 +3,9 @@ import heapq
 
 
 def dijkstra_heap(graph, root):
-    root.distance = 0
+    root.d = 0
 
-    priority_queue = [(root.distance, root)]
+    priority_queue = [(root.d, root)]
 
     while priority_queue:
         current_distance, vertex = heapq.heappop(priority_queue)
@@ -14,14 +14,14 @@ def dijkstra_heap(graph, root):
         for adj_vertex_id, weight in vertex.adj_dict.items():
             adj_vertex = graph[adj_vertex_id]
 
-            if adj_vertex.distance > vertex.distance + weight:
-                adj_vertex.distance = vertex.distance + weight
+            if adj_vertex.d > vertex.d + weight:
+                adj_vertex.d = vertex.d + weight
                 adj_vertex.parent = vertex
-                heapq.heappush(priority_queue, (adj_vertex.distance, adj_vertex))
+                heapq.heappush(priority_queue, (adj_vertex.d, adj_vertex))
 
 
 def dijkstra(graph, root):
-    root.distance = 0
+    root.d = 0
 
     frontier_vertices = {root}
 
@@ -32,8 +32,8 @@ def dijkstra(graph, root):
         for adj_vertex_id, weight in vertex.adj_dict.items():
             adj_vertex = graph[adj_vertex_id]
 
-            if adj_vertex.distance > vertex.distance + weight:
-                adj_vertex.distance = vertex.distance + weight
+            if adj_vertex.d > vertex.distance + weight:
+                adj_vertex.d = vertex.distance + weight
                 adj_vertex.parent = vertex
                 frontier_vertices.add(adj_vertex)
 
@@ -46,8 +46,8 @@ def find_closest_vertex(frontier_vertices):
     closest_vertex = None
 
     for vertex in frontier_vertices:
-        if vertex.distance < min_dist:
-            min_dist = vertex.distance
+        if vertex.d < min_dist:
+            min_dist = vertex.d
             closest_vertex = vertex
 
     return closest_vertex

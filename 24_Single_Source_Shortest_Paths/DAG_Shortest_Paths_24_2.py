@@ -31,9 +31,9 @@ def dag_shortest_paths(graph):
         for adj_vertex_id in vertex.adj_dict:
             adj_vertex = graph[adj_vertex_id]
 
-            if adj_vertex.distance > vertex.distance + vertex.adj_dict[adj_vertex_id]:
+            if adj_vertex.d > vertex.d + vertex.adj_dict[adj_vertex_id]:
                 # Relax the edges
-                adj_vertex.distance = vertex.distance + vertex.adj_dict[adj_vertex_id]
+                adj_vertex.d = vertex.d + vertex.adj_dict[adj_vertex_id]
                 adj_vertex.parent = vertex
 
 

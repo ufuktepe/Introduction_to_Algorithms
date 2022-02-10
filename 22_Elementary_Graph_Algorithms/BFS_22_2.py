@@ -35,7 +35,7 @@ def bfs(s):
     @return: None
     """
     s.color = 'Gray'
-    s.distance = 0
+    s.d = 0
 
     # Queue of vertices. Invariant: includes only gray vertices
     queue = list()
@@ -52,7 +52,7 @@ def bfs(s):
             # If the adjacent vertex is White that means it has not been discovered yet
             if v.color == 'White':
                 v.color = 'Gray'
-                v.distance = u.distance + 1
+                v.distance = u.d + 1
                 v.parent = u
                 queue.append(v)
         u.color = 'Black'

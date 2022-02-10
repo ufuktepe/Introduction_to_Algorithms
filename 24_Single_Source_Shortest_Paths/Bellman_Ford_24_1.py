@@ -7,20 +7,20 @@ def bellman_ford(graph, s):
     for i in range(len(graph) - 1):
         # Loop through each edge
         for vertex_id, vertex in graph.items():
-            print(f'Main vertex: {vertex_id} Distance: {vertex.distance}')
+            print(f'Main vertex: {vertex_id} Distance: {vertex.d}')
             for adj_vertex_id, weight in vertex.adj_dict.items():
                 adj_vertex = graph[adj_vertex_id]
-                print(f'   Adj vertex: {adj_vertex_id} Distance: {adj_vertex.distance}')
-                if adj_vertex.distance > vertex.distance + weight:
-                    adj_vertex.distance = vertex.distance + weight
-                    print(f'      Adj vertex: {adj_vertex_id} Distance: {adj_vertex.distance}')
+                print(f'   Adj vertex: {adj_vertex_id} Distance: {adj_vertex.d}')
+                if adj_vertex.d > vertex.d + weight:
+                    adj_vertex.d = vertex.d + weight
+                    print(f'      Adj vertex: {adj_vertex_id} Distance: {adj_vertex.d}')
 
     # Check for negative cycles. Loop through each edge
     for vertex_id, vertex in graph.items():
         for adj_vertex_id, weight in vertex.adj_dict.items():
             adj_vertex = graph[adj_vertex_id]
 
-            if adj_vertex.distance > vertex.distance + weight:
+            if adj_vertex.d > vertex.d + weight:
                 return False
 
     return True
