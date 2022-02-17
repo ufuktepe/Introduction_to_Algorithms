@@ -20,13 +20,13 @@ class Vertex:
 
 # --------------------------- Begin - Dynamic Programming Version ---------------------------
 def dfs_dp(vertex, graph, dp):
-    vertex.visited = True
+    vertex.color = True
 
     # Loop thru adjacent vertices
     for adj_vertex_id in vertex.adj_dict:
         adj_vertex = graph[adj_vertex_id]
 
-        if not adj_vertex.visited:
+        if not adj_vertex.color:
             dfs_dp(adj_vertex, graph, dp)
 
         if vertex.max_length < adj_vertex.max_length + vertex.adj_dict[adj_vertex_id]:
@@ -39,7 +39,7 @@ def dag_longest_paths_dp(graph):
     for vertex_id in graph:
         vertex = graph[vertex_id]
 
-        if not vertex.visited:
+        if not vertex.color:
             dfs_dp(vertex, graph)
 
     longest_path = 0
@@ -85,7 +85,7 @@ def sort_topologically(graph):
     for vertex_id in graph:
         vertex = graph[vertex_id]
 
-        if not vertex.visited:
+        if not vertex.color:
             sorted_vertices = dfs(vertex, sorted_vertices, graph)
 
     return sorted_vertices
@@ -93,13 +93,13 @@ def sort_topologically(graph):
 
 def dfs(vertex, sorted_vertices, graph):
 
-    vertex.visited = True
+    vertex.color = True
 
     # Loop thru adjacent vertices
     for adj_vertex_id in vertex.adj_dict:
         adj_vertex = graph[adj_vertex_id]
 
-        if not adj_vertex.visited:
+        if not adj_vertex.color:
             dfs(adj_vertex, sorted_vertices, graph)
 
     sorted_vertices.insert(0, vertex)
