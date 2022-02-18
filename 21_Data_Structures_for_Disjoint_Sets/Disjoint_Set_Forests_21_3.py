@@ -32,10 +32,10 @@ class Graph:
         :param v: the given main node
         :return: None
         """
-        v.visited = True
+        v.color = True
 
         for adj_node in v.adj_nodes:
-            if not adj_node.visited:
+            if not adj_node.color:
                 self.dfs_visit_adj_nodes(adj_node)
             if self.find_set(v) != self.find_set(adj_node):
                 self.union(v, adj_node)
@@ -52,7 +52,7 @@ class Graph:
             self.make_set(v)
 
         for v in self.vertices:
-            if not v.visited:
+            if not v.color:
                 self.dfs_visit_adj_nodes(v)
 
     def make_set(self, v):

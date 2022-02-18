@@ -1,5 +1,21 @@
-from DAG_Shortest_Paths_24_2 import Vertex
 import heapq
+
+class Vertex:
+    def __init__(self, an_id, an_adj_dict):
+        self.id = an_id
+        self.parent = None
+        self.distance = float('inf')
+        self.visited = False
+        self.adj_dict = an_adj_dict  # key=id : val=weight
+
+    def add_adj_vertex(self, id, weight):
+        self.adj_dict[id] = weight
+
+    def __lt__(self, other):
+        return self.id < other.id
+
+    def __le__(self, other):
+        return self.id <= other.id
 
 
 def dijkstra_heap(graph, root):
@@ -14,14 +30,14 @@ def dijkstra_heap(graph, root):
         for adj_vertex_id, weight in vertex.adj_dict.items():
             adj_vertex = graph[adj_vertex_id]
 
-            if adj_vertex.d > vertex.d + weight:
-                adj_vertex.d = vertex.d + weight
+            if adj_vertex.distance > vertex.distance + weight:
+                adj_vertex.distance = vertex.distance + weight
                 adj_vertex.parent = vertex
-                heapq.heappush(priority_queue, (adj_vertex.d, adj_vertex))
+                heapq.heappush(priority_queue, (adj_vertex.distance, adj_vertex))
 
 
 def dijkstra(graph, root):
-    root.d = 0
+    root.distance = 0
 
     frontier_vertices = {root}
 
@@ -32,8 +48,8 @@ def dijkstra(graph, root):
         for adj_vertex_id, weight in vertex.adj_dict.items():
             adj_vertex = graph[adj_vertex_id]
 
-            if adj_vertex.d > vertex.distance + weight:
-                adj_vertex.d = vertex.distance + weight
+            if adj_vertex.distance > vertex.distance + weight:
+                adj_vertex.distance = vertex.distance + weight
                 adj_vertex.parent = vertex
                 frontier_vertices.add(adj_vertex)
 
@@ -46,8 +62,8 @@ def find_closest_vertex(frontier_vertices):
     closest_vertex = None
 
     for vertex in frontier_vertices:
-        if vertex.d < min_dist:
-            min_dist = vertex.d
+        if vertex.distance < min_dist:
+            min_dist = vertex.distance
             closest_vertex = vertex
 
     return closest_vertex

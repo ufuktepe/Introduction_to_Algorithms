@@ -46,10 +46,10 @@ class Graph:
 
     def dfs(self, vertex, stack):
 
-        vertex.visited = True
+        vertex.color = True
 
         for adj_vertex in vertex.adj_vertices:
-            if not adj_vertex.visited:
+            if not adj_vertex.color:
                 self.dfs(adj_vertex, stack)
 
         stack.append(vertex.id)
@@ -59,7 +59,7 @@ class Graph:
 
         # First Pass. Populate the stack from the leaves to the root.
         for vertex in self.vertices.values():
-            if not vertex.visited:
+            if not vertex.color:
                 self.dfs(vertex, stack)
 
         # Create a reversed graph

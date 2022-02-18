@@ -50,7 +50,7 @@ def sort_topologically(graph):
     for vertex_id in graph:
         vertex = graph[vertex_id]
 
-        if not vertex.visited:
+        if not vertex.color:
             sorted_vertices = dfs(vertex, sorted_vertices)
 
     return sorted_vertices
@@ -64,12 +64,12 @@ def dfs(vertex, sorted_vertices):
     :return: sorted_vertices
     """
 
-    vertex.visited = True
+    vertex.color = True
     # Loop thru adjacent vertices
     for adj_vertex_id in vertex.adj_dict:
         adj_vertex = graph[adj_vertex_id]
 
-        if not adj_vertex.visited:
+        if not adj_vertex.color:
             dfs(adj_vertex, sorted_vertices)
 
     sorted_vertices.insert(0, vertex)

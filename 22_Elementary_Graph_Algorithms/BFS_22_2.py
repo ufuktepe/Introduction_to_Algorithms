@@ -38,7 +38,7 @@ def bfs(s):
     s.d = 0
 
     # Queue of vertices. Invariant: includes only gray vertices
-    queue = list()
+    queue = []
 
     queue.append(s)
 
