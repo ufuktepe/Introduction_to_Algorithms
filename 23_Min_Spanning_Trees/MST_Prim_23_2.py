@@ -101,7 +101,7 @@ if __name__ == '__main__':
     g = Vertex('g')
     h = Vertex('h')
     i = Vertex('i')
-    vertices = {a, b, c, d, e, f, g, h, i}
+    vertices = [a, b, c, d, e, f, g, h, i]
 
     graph = Graph(vertices)
     graph.add_edge(a, b, 4)
