@@ -41,6 +41,11 @@ class MinHeap():
         # If self.lst[i] is not the min, swap self.lst[min_idx] with self.lst[i] and call min_heapify again
         if min_idx != i:
             self.lst[i], self.lst[min_idx] = self.lst[min_idx], self.lst[i]
+
+            # Update the index dictionary
+            self.idx_dict[self.lst[i]] = i
+            self.idx_dict[self.lst[min_idx]] = min_idx
+
             self.min_heapify(min_idx)
 
     def build_min_heap(self):
@@ -72,8 +77,14 @@ class MinHeap():
         # Remove the last item
         del self.lst[-1]
 
-        # Restore the min heap property
-        self.build_min_heap()
+        if len(self.lst) > 0:
+            # Update the index dictionary
+            self.idx_dict[self.lst[0]] = 0
+
+            # Restore the min heap property
+            # self.build_min_heap()
+            self.min_heapify(0)
+            # self.build_idx_dict()
 
         return min
 
