@@ -108,22 +108,21 @@ def dfs(vertex, sorted_vertices, graph):
 
 
 if __name__ == '__main__':
-    d0 = Vertex('d0', {'a': -1, 'b': -1, 'c': -1, 'd': -1, 'e': -1, 'f': -1})
-    a = Vertex('a', {'b': -2, 'c': -2, 'e': -3})
+    d0 = Vertex('d0', {'e': 3})
+    a = Vertex('a', {'b': 2, 'c': 2, 'e': 3})
     b = Vertex('b', {})
     c = Vertex('c', {})
-    d = Vertex('d', {'f': -10})
-    e = Vertex('e', {'b': -4, 'd': -1})
+    d = Vertex('d', {'f': 10})
+    e = Vertex('e', {'b': 4, 'd': -1})
     f = Vertex('f', {})
     graph = {'e': e, 'd0': d0, 'c': c, 'd': d, 'a': a, 'b': b, 'f': f}
 
     d0.d = 0
 
-    d_max, last_vertex = dag_longest_paths(graph)
+    d_max, v = dag_longest_paths(graph)
 
     # dag_longest_paths_dp(graph)
 
-    v = last_vertex
     longest_path = []
 
     while v:
@@ -132,3 +131,6 @@ if __name__ == '__main__':
 
     print(longest_path)
     print(f'Longest Path Length: {d_max}')
+
+    for v_id, v in graph.items():
+        print(f'{v_id}: {v.d}')
