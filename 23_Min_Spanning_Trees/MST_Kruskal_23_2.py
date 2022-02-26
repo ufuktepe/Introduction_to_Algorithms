@@ -105,7 +105,7 @@ class Graph:
         else:
             u_root.parent = v_root
             if u_root.rank == v_root.rank:
-                u_root.rank += 1
+                v_root.rank += 1
 
     def find_set(self, v):
         """
