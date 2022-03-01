@@ -17,8 +17,10 @@ class Graph:
         if (v1, v2) in self.edges or (v2, v1) in self.edges:
             return
 
-        self.union(v1, v2)
         self.edges.add((v1, v2))
+
+        return self.union(v1, v2)
+
 
     def request_squad_name(self, v):
         v_root = self.find(v)
@@ -34,17 +36,20 @@ class Graph:
         if v1_root == v2_root:
             if not v1_root.circle:
                 v1_root.circle = True
-            return
+            return False
 
         if v1_root.rank > v2_root.rank:
             v2_root.p = v1_root
+            if v2_root.circle:
+                v1_root.circle = True
         else:
             v1_root.p = v2_root
-
             if v1_root.rank == v2_root.rank:
                 v2_root.rank += 1
+            if v1_root.circle:
+                v2_root.circle = True
 
-        return
+        return True
 
     def find(self, v):
         if v.p != v:
@@ -65,10 +70,17 @@ if __name__ == '__main__':
     vertices = [a, b, c, d, e, f, g, h]
     graph = Graph()
 
-    edges = [(a, b), (d, e), (e, c), (f, e), (d, c), (b, f), (h, g), (h, a)]
+    edges = [(a, b), (b, c), (c, a), (d, e), (c, d), (f, g), (h, f), (f, a)]
+
+    count = 0
 
     for edge in edges:
-        graph.add_edge(edge)
+        if graph.add_edge(edge):
+            count += 1
+            print(f'Count:{count}')
+
+        if count == len(vertices) - 1:
+            print('All vertices are connected')
 
         for v in vertices:
             name = graph.request_squad_name(v)
