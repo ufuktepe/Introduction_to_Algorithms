@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/22_Elementary_Graph_Algorithms" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/06_Heapsort" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/15_Dynamic_Programming" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/00_CSCI_124" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
