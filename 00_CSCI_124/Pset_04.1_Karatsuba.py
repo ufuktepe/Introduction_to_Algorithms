@@ -27,16 +27,17 @@ def karatsuba3(x, y):
     if len(str(x)) < 3 or len(str(y)) < 3:
         return x*y
     else:
-        m = max(len(str(x)), len(str(y)))
-        s = int(m / 3)
+        n = max(len(str(x)), len(str(y)))
+        n = len(str(x))
+        s = int(n / 3)
 
-        a = int(str(x)[:n_x - 2*s])
-        b = int(str(x)[n_x - 2*s: n_x - s])
-        c = int(str(x)[n_x - s:])
+        a = int(str(x)[:s])
+        b = int(str(x)[s: 2 * s])
+        c = int(str(x)[2 * s:])
 
-        d = int(str(y)[:y_x - 2*s])
-        e = int(str(y)[y_x - 2*s: y_x - s])
-        f = int(str(y)[y_x - s:])
+        d = int(str(y)[:s])
+        e = int(str(y)[s: 2 * s])
+        f = int(str(y)[2 * s:])
 
         ad = karatsuba3(a, d)
         be = karatsuba3(b, e)
