@@ -148,15 +148,15 @@ def insertion_sort(lst):
 
 
 if __name__ == '__main__':
-    lst = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+    lst = [4, 2, 3, 1]
 
-    # # Merge Sort Iterative approach
-    # print(merge_sort_iterative(lst))
+    # Merge Sort Iterative approach
+    print(merge_sort_iterative(lst))
 
     # # Merge Sort Recursive approach
     # merge_sort_recursive(lst)
     # print(lst)
 
-    # Insertion Sort
-    insertion_sort(lst)
-    print(lst)
+    # # Insertion Sort
+    # insertion_sort(lst)
+    # print(lst)

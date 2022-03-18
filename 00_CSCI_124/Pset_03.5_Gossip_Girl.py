@@ -39,11 +39,11 @@ class Graph:
             return False
 
         if v1_root.rank > v2_root.rank:
-            v2_root.p = v1_root
+            v2_root.s = v1_root
             if v2_root.circle:
                 v1_root.circle = True
         else:
-            v1_root.p = v2_root
+            v1_root.s = v2_root
             if v1_root.rank == v2_root.rank:
                 v2_root.rank += 1
             if v1_root.circle:
@@ -52,9 +52,9 @@ class Graph:
         return True
 
     def find(self, v):
-        if v.p != v:
-            v.p = self.find(v.p)
-        return v.p
+        if v.s != v:
+            v.s = self.find(v.s)
+        return v.s
 
 
 if __name__ == '__main__':
