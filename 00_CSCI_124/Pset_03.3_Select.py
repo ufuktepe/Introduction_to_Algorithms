@@ -19,12 +19,12 @@ def select(arr, k):
 
     # find the median of medians
     if len(medians) <= 5:
-        pivot = sorted(medians)[len(medians) // 2 - 1]
+        pivot = sorted(medians)[len(medians) // 2]
     else:
-        pivot = select(medians, len(medians) // 2 - 1)
+        pivot = select(medians, len(medians) // 2)
 
     # get the index of the pivot and create low and high arrays
-    p, arr_low, arr_high = partition(arr, pivot)
+    arr_low, arr_high = partition(arr, pivot)
 
     if k - 1 == len(arr_low):
         #select that pivot
@@ -37,14 +37,13 @@ def select(arr, k):
         #select a new pivot by looking on the right side of the partioning
         return select(arr_high, k - (len(arr) - len(arr_high)))
 
+
 def partition(arr, pivot):
-    idx = 0
     arr_low = []
     arr_high = []
     found_pivot = False
     for i in range(len(arr)):
         if pivot > arr[i]:
-            idx += 1
             arr_low.append(arr[i])
         elif pivot < arr[i]:
             arr_high.append(arr[i])
@@ -53,10 +52,14 @@ def partition(arr, pivot):
         else:
             found_pivot = True
 
-    return idx, arr_low, arr_high
+    return arr_low, arr_high
 
 
 if __name__ == '__main__':
-    arr = [1, 4, 3, 2, 5, 7, 7, 7, 8, 9, 10]
-    k_th_elm = select(arr, 4)
+    arr = [1, 4, 3, 2, 5, 6, 7, 8, 9]
+    arr = []
+    for i in range(100):
+        arr.append(i+1)
+
+    k_th_elm = select(arr, 26)
     print(k_th_elm)
