@@ -80,8 +80,8 @@ def knapsack(items, capacity, target_profit):
 
 
 if __name__ == '__main__':
-    weight = [2, 1, 6, 3, 5]
-    value = [1, 6, 5, 4, 5]
+    weight = [2, 1, 6, 3, 5, 4]
+    value = [1, 6, 5, 4, 5, 4]
 
     items = list()
 
