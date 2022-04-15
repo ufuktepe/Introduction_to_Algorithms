@@ -46,32 +46,42 @@ def knapsack(items, capacity, target_profit):
 
             # Note that current item is items[i - 1] which corresponds to dp[i][j] since i ranges from 1 to n.
 
-            if item_val > j or item_weight > capacity:
+            if item_val <= j and item_weight + w[i-1][j-item_val] <= capacity and dp[i-1][j-item_val] == 1:
+                dp[i][j] = 1
+                if w[i - 1][j] > 0:
+                    w[i][j] = min(w[i - 1][j], w[i - 1][j - item_val] + item_weight)
+                else:
+                    w[i][j] = w[i - 1][j - item_val] + item_weight
+            else:
                 dp[i][j] = dp[i - 1][j]
                 w[i][j] = w[i - 1][j]
-            else:
-                remaining_weight = w[i - 1][j - item_val]
-                new_weight = remaining_weight + item_weight
 
-                rem_val = dp[i - 1][j - item_val]
-
-                if new_weight <= capacity and rem_val == 1:
-                    if dp[i - 1][j] == 1 and w[i - 1][j] < new_weight:
-                        dp[i][j] = dp[i - 1][j]
-                        w[i][j] = w[i - 1][j]
-                    else:
-                        dp[i][j] = 1
-                        w[i][j] = new_weight
-                else:
-                    dp[i][j] = dp[i - 1][j]
-                    w[i][j] = w[i - 1][j]
+            # if item_val > j or item_weight > capacity:
+            #     dp[i][j] = dp[i - 1][j]
+            #     w[i][j] = w[i - 1][j]
+            # else:
+            #     remaining_weight = w[i - 1][j - item_val]
+            #     new_weight = remaining_weight + item_weight
+            #
+            #     rem_val = dp[i - 1][j - item_val]
+            #
+            #     if new_weight <= capacity and rem_val == 1:
+            #         if dp[i - 1][j] == 1 and w[i - 1][j] < new_weight:
+            #             dp[i][j] = dp[i - 1][j]
+            #             w[i][j] = w[i - 1][j]
+            #         else:
+            #             dp[i][j] = 1
+            #             w[i][j] = new_weight
+            #     else:
+            #         dp[i][j] = dp[i - 1][j]
+            #         w[i][j] = w[i - 1][j]
 
     return dp, w
 
 
 if __name__ == '__main__':
-    weight = [2, 1, 6, 3]
-    value = [1, 6, 5, 4]
+    weight = [2, 1, 6, 3, 5]
+    value = [1, 6, 5, 4, 5]
 
     items = list()
 
